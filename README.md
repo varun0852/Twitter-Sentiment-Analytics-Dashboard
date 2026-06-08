@@ -1,146 +1,117 @@
-# 🏦 Customer Churn Prediction using Machine Learning
+# 🐦 Twitter Sentiment Analytics Dashboard
 
-An end-to-end machine learning project that predicts customer churn in a banking dataset — featuring full EDA, statistical feature selection, multi-model comparison, SMOTE oversampling, GridSearchCV tuning, and a live Streamlit deployment.
+An interactive NLP-powered Streamlit dashboard that classifies tweet sentiment in real-time using a Logistic Regression model trained with TF-IDF vectorization. Supports single tweet analysis and bulk CSV batch processing with visual analytics.
 
-[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://customer-churn-prediction-using-machine-learning-j2tfig8zqn3gv.streamlit.app/)
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://twitter-sentiment-analytics-dashboard-sybzhk4p9qefdprjqpttpq.streamlit.app/)
 
 ---
 
 ## 🚀 Live Demo
 
-🔗 **[Try the app here](https://customer-churn-prediction-using-machine-learning-j2tfig8zqn3gv.streamlit.app/)**
+🔗 **[Try the app here](https://twitter-sentiment-analytics-dashboard-sybzhk4p9qefdprjqpttpq.streamlit.app/)**
 
-Enter customer details → Get instant churn prediction + probability score
-
----
-
-## 📊 Model Results
-
-### Before SMOTE
-| Model               | Accuracy | Precision | Recall | F1 Score |
-|---------------------|----------|-----------|--------|----------|
-| Random Forest       | 83.71%   | 64.68%    | 42.23% | 51.10%   |
-| XGBoost             | 82.56%   | 59.42%    | 42.49% | 49.55%   |
-| Decision Tree       | 77.34%   | 44.12%    | 46.63% | 45.34%   |
-| Logistic Regression | 82.40%   | 65.03%    | 27.46% | 38.62%   |
-
-### After SMOTE
-| Model               | Accuracy | Precision | Recall | F1 Score |
-|---------------------|----------|-----------|--------|----------|
-| Random Forest       | 79.22%   | 48.66%    | 56.48% | 52.28%   |
-| XGBoost             | 80.10%   | 50.64%    | 51.30% | 50.94%   |
-| Logistic Regression | 70.50%   | 37.16%    | 67.10% | 47.83%   |
-| Decision Tree       | 74.20%   | 37.89%    | 43.78% | 40.62%   |
-
-### After GridSearchCV — Tuned Random Forest
-| Class    | Precision | Recall | F1 Score |
-|----------|-----------|--------|----------|
-| Retained | 0.89      | 0.85   | 0.87     |
-| Churned  | 0.49      | 0.57   | 0.53     |
-
-🏆 **Best Cross-Validation F1: 86.61%**
-⚙️ **Best Params:** `max_depth: 20, min_samples_leaf: 1, min_samples_split: 2, n_estimators: 200`
+Paste any tweet → Get instant Positive / Negative prediction with confidence score
 
 ---
 
-## 🎯 Objective
+## 🎬 Demo
 
-Predict whether a bank customer will churn (leave the bank) based on demographic and account features — enabling proactive retention strategies that save revenue.
-
----
-
-## 📁 Dataset
-
-- **Size:** ~7,000 records
-- **Target:** Churn (1 = churned, 0 = retained)
-- **Features:** Age, Balance, Credit Score, Geography, Gender, Tenure, Number of Products, Active Member, Estimated Salary
+![Twitter Sentiment Dashboard Demo](twitter_sentiment_dashboard_demo.gif)
 
 ---
 
-## ⚙️ Project Workflow
+## 📸 Screenshots
+
+<table>
+  <tr>
+    <td><strong>Dashboard Home</strong><br><img src="assets/dashboard_home.png" width="400"/></td>
+    <td><strong>Single Tweet Prediction</strong><br><img src="assets/prediction.png" width="400"/></td>
+  </tr>
+  <tr>
+    <td><strong>Batch Analysis</strong><br><img src="assets/batch_analysis.png" width="400"/></td>
+    <td><strong>Batch Prediction Results</strong><br><img src="assets/batch_prediction.png" width="400"/></td>
+  </tr>
+  <tr>
+    <td><strong>Sentiment Distribution</strong><br><img src="assets/pie_chart.png" width="400"/></td>
+    <td><strong>Word Cloud</strong><br><img src="assets/word_cloud.png" width="400"/></td>
+  </tr>
+</table>
+
+---
+
+## ✨ Features
+
+- **Single Tweet Analysis** — paste any tweet, get instant Positive/Negative prediction with confidence score
+- **Batch CSV Analysis** — upload a CSV of tweets, get predictions for all rows + downloadable results
+- **Sentiment Distribution** — interactive Plotly pie chart of positive vs negative split
+- **Word Cloud** — visual representation of most frequent words in the dataset
+- **Confidence Score** — model prediction probability shown for every single tweet
+- **Downloadable Results** — export batch predictions as a CSV file
+
+---
+
+## 🧠 How It Works
 
 ```
-Data Loading & Exploration
-        ↓
-Exploratory Data Analysis (EDA)
-(distributions, correlations, class imbalance check)
-        ↓
-Statistical Feature Testing
-(Chi-Square for categorical, ANOVA for numerical)
-        ↓
-Data Preprocessing
-(Label encoding, MinMaxScaler, IQR outlier removal)
-        ↓
-Feature Selection
-(Sequential Feature Selector — top 9 features)
-        ↓
-Model Training & Comparison
-(Logistic Regression, Decision Tree, Random Forest, XGBoost)
-        ↓
-SMOTE Oversampling
-(Fix class imbalance — boosted Recall from 42% → 56%)
-        ↓
-GridSearchCV Hyperparameter Tuning
-(Tuned Random Forest — Best CV F1: 86.61%)
-        ↓
-Streamlit Deployment
-(Live app with real-time churn prediction)
+Tweet Input
+    ↓
+Text Preprocessing
+(lowercase → remove URLs → remove @mentions → strip punctuation)
+    ↓
+TF-IDF Vectorization
+    ↓
+Logistic Regression Model
+    ↓
+Prediction: Positive 😊 / Negative 😞 + Confidence Score
 ```
 
 ---
 
-## 📈 Visualizations
+## 📊 Model Performance
 
-### Model Comparison Chart
-![Model Comparison](model_comparision.png)
-
-### Confusion Matrix — Tuned Random Forest
-![Confusion Matrix](confusion_matrix.png)
-
-### Top 10 Feature Importances
-![Feature Importance](feature_importance.png)
-
----
-
-## 🔑 Key Findings
-
-- **SMOTE significantly improved Recall** — Random Forest Recall jumped from 42.23% → 56.48%
-- **Logistic Regression** saw the biggest Recall boost: 27.46% → 67.10% after SMOTE
-- **Tuned Random Forest** achieved best cross-validation F1 of **86.61%** via GridSearchCV
-- Without SMOTE all models were heavily biased toward predicting "Retained"
-- **Top churn predictors:** Age, Estimated Salary, Active Member status, Country (Germany)
+| Metric     | Score               |
+|------------|---------------------|
+| Model      | Logistic Regression |
+| Vectorizer | TF-IDF              |
+| Accuracy   | ~77%                |
+| F1 Score   | ~0.76               |
+| Dataset    | ~2,000 tweets       |
 
 ---
 
 ## 🛠️ Tech Stack
 
-| Layer             | Technology                         |
-|-------------------|------------------------------------|
-| Language          | Python 3.10+                       |
-| Data Processing   | Pandas, NumPy                      |
-| Visualization     | Matplotlib, Seaborn                |
-| ML Models         | Scikit-learn, XGBoost              |
-| Oversampling      | imbalanced-learn (SMOTE)           |
-| Hyperparameter    | GridSearchCV (Scikit-learn)        |
-| Feature Selection | Sequential Feature Selector        |
-| Statistical Tests | Chi-Square, ANOVA (SciPy)          |
-| Deployment        | Streamlit Cloud                    |
-| Environment       | Google Colab                       |
+| Layer         | Technology                         |
+|---------------|------------------------------------|
+| Frontend      | Streamlit                          |
+| ML Model      | Scikit-learn (Logistic Regression) |
+| Vectorizer    | TF-IDF (Scikit-learn)              |
+| Visualization | Plotly, WordCloud, Matplotlib      |
+| Data          | Pandas, NumPy                      |
+| Deployment    | Streamlit Cloud                    |
+| Language      | Python 3.10+                       |
 
 ---
 
 ## 📁 Project Structure
 
 ```
-Customer-Churn-Prediction-using-Machine-Learning/
-├── customer_churn_prediction.ipynb   # Full notebook: EDA + modelling + SMOTE + GridSearchCV
-├── churn_app.py                      # Streamlit deployment app
-├── model.json                        # Trained XGBoost model (native format, 452KB)
-├── requirements.txt                  # Python dependencies
-├── model_comparision.png             # Bar chart comparing all 4 models
-├── confusion_matrix.png              # Confusion matrix for Tuned Random Forest
-├── feature_importance.png            # Top 10 feature importances
-└── README.md
+Twitter-Sentiment-Analytics-Dashboard/
+├── app.py                                  # Main Streamlit application
+├── sentiment_model.pkl                     # Trained Logistic Regression model
+├── tfidf_vectorizer.pkl                    # Fitted TF-IDF vectorizer
+├── sample_tweets.csv                       # Sample CSV for testing batch analysis
+├── requirements.txt                        # Python dependencies
+├── twitter_sentiment_dashboard_demo.gif    # Demo GIF
+├── assets/                                 # Dashboard screenshots
+│   ├── dashboard_home.png
+│   ├── prediction.png
+│   ├── batch_analysis.png
+│   ├── batch_prediction.png
+│   ├── pie_chart.png
+│   └── word_cloud.png
+└── notebooks/
+    └── Twitter_Sentiment_Analysis.ipynb    # Model training notebook
 ```
 
 ---
@@ -149,8 +120,8 @@ Customer-Churn-Prediction-using-Machine-Learning/
 
 **1. Clone the repo**
 ```bash
-git clone https://github.com/varun0852/Customer-Churn-Prediction-using-Machine-Learning.git
-cd Customer-Churn-Prediction-using-Machine-Learning
+git clone https://github.com/varun0852/Twitter-Sentiment-Analytics-Dashboard.git
+cd Twitter-Sentiment-Analytics-Dashboard
 ```
 
 **2. Install dependencies**
@@ -158,26 +129,30 @@ cd Customer-Churn-Prediction-using-Machine-Learning
 pip install -r requirements.txt
 ```
 
-**3. Run the Streamlit app**
+**3. Run the app**
 ```bash
-streamlit run churn_app.py
+streamlit run app.py
 ```
 
-**4. Or run the notebook**
-```bash
-jupyter notebook customer_churn_prediction.ipynb
+**4. Open in browser**
+```
+http://localhost:8501
 ```
 
 ---
 
-## 🔮 Next Steps
+## 🧪 Try It Out
 
-- Try ensemble stacking of RF + XGBoost
-- Experiment with threshold tuning to further improve Churned class F1
-- Add SHAP explainability to the Streamlit app
+For **single tweet** analysis, paste any of these:
+- `I love this product!` → Positive 😊
+- `Worst experience ever` → Negative 😞
+- `Amazing customer support` → Positive 😊
+- `This app keeps crashing` → Negative 😞
+
+For **batch analysis**, upload any CSV with a column named `tweet`.
+A `sample_tweets.csv` is included in the repo to test with.
 
 ---
-
 
 ## 👤 Author
 
